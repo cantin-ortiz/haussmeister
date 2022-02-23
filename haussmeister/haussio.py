@@ -1477,10 +1477,8 @@ def load_haussio(dirname, ftype=None):
                 sampletiff = tifffile.TiffFile(tiffs[0])
                 if 'info' in dir(sampletiff):
                     sampleifd = sampletiff.info()
-                else:
-                    sampleifd = sampletiff.shaped_metadata[0]
-                if 'Exposure' in sampleifd and 'Gain' in sampleifd:
-                    ftype = "doric"
+                    if 'Exposure' in sampleifd and 'Gain' in sampleifd:
+                        ftype = "doric"
 
     if ftype is None:
         raise RuntimeError("File autodetection only for ThorLabs and Prairie files")
