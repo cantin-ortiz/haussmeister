@@ -1475,7 +1475,10 @@ def load_haussio(dirname, ftype=None):
             # attempt to open first tiff:
             if len(tiffs):
                 sampletiff = tifffile.TiffFile(tiffs[0])
-                sampleifd = sampletiff.info()
+                if 'info' in dir(sampletiff):
+                    sampleifd = sampletiff.info()
+                else:
+                    sampleifd = sampletiff.shaped_metadata[0]
                 if 'Exposure' in sampleifd and 'Gain' in sampleifd:
                     ftype = "doric"
 
